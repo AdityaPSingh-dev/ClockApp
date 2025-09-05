@@ -28,6 +28,7 @@ export function ProductivityTimer() {
   useEffect(() => {
     // Create a buzzer sound using Web Audio API
     const createBuzzerSound = () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
 
       return () => {
@@ -51,8 +52,9 @@ export function ProductivityTimer() {
     }
 
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       audioRef.current = { play: createBuzzerSound() } as any
-    } catch (error) {
+    } catch  {
       console.log("Audio context not available")
     }
   }, [])
@@ -86,7 +88,7 @@ export function ProductivityTimer() {
     if (audioRef.current && audioRef.current.play) {
       try {
         audioRef.current.play()
-      } catch (error) {
+      } catch  {
         console.log("Could not play buzzer sound")
       }
     }
